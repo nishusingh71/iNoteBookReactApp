@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import UserDetails from "./UserDetails";
 
 const Navbar = (props) => {
   const location = useLocation();
@@ -63,9 +64,12 @@ const Navbar = (props) => {
               </Link>
             </form>
           ) : (
-            <button onClick={handleLogout} className="btn btn-primary">
-              Logout
-            </button>
+            <>
+              <UserDetails />
+              <button onClick={handleLogout} className="btn btn-primary">
+                Logout
+              </button>
+            </>
           )}
         </div>
       </div>

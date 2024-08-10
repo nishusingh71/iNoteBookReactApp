@@ -55,6 +55,9 @@ const Noteitem = (props) => {
           </div>
           <p className="card-text">{note.description}</p>
         </div>
+        <ul className="list-group list-group-flush">
+          <li className="list-group-item"><strong>Tag : </strong>{note.tag}</li>
+        </ul>
       </div>
     </div>
   );
