@@ -6,6 +6,7 @@ const UserDetails = () => {
   const { user, getUserDetails } = context;
   useEffect(() => {
     getUserDetails();
+    // eslint-disable-next-line
   }, []);
   return (
     <>
@@ -19,7 +20,7 @@ const UserDetails = () => {
       >
         <div className="row">
           <div style={{ fontWeight: "bold" }}>Hello, {user.name || "User"}</div>
-          <div>@{user.username}</div>
+          <div>@{user.username || "(username)"}</div>
         </div>
       </span>
     </>

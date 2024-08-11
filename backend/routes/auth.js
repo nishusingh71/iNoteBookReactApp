@@ -15,6 +15,7 @@ router.post(
     body("username", "Enter a valid username").isLength({ min: 3 }),
     body("email", "Enter a valid email").isEmail(),
     body("password", "Enter a valid password").isLength({ min: 5 }),
+    body("cpassword", "Enter a valid cpassword").isLength({ min: 5 }),
   ],
   async (req, res) => {
     // If there are errors return bad request and the errors
@@ -26,34 +27,58 @@ router.post(
     }
     // Check whether the user with this email exists already
     try {
-      let user = await User.findOne({ email: req.body.email });
-      if (user) {
-        return res.status(400).json({
+      // Authenticating Captcha
+      const captchaRes = await fetch(
+        `https://www.google.com/recaptcha/api/siteverify?secret=${req.body.secretKey}&response=${req.body.recaptchaValue}`,
+        {
+          method: "POST",
+        }
+      );
+      const captchaData = await captchaRes.json();
+
+      if (captchaData.success) {
+        let user = await User.findOne({ email: req.body.email });
+        if (user) {
+          return res.status(400).json({
+            success,
+            error:
+              "Unable to process your request. Please try a different email address.",
+          });
+        }
+        let username = await User.findOne({ username: req.body.username });
+        if (username) {
+          return res.status(400).json({
+            success,
+            error: "Kindly select a different username.",
+          });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const secPass = await bcrypt.hash(req.body.password, salt);
+
+        // Create a new user
+        user = await User.create({
+          name: req.body.name,
+          username: req.body.username,
+          email: req.body.email,
+          password: secPass,
+        });
+        // .then(user => res.json(user))
+        // .catch(err => res.json({error: 'Please enter a unique value for emial', message: err.message}))
+        const data = {
+          user: {
+            id: user.id,
+          },
+        };
+        const authtoken = jwt.sign(data, JWT_SECRET);
+        success = true;
+        res.send({ success, authtoken });
+      } else {
+        return res.status(429).json({
           success,
-          error: "Sorry a user with this email already exists",
+          error: "Recaptcha verification failed. Please try again.",
         });
       }
-
-      const salt = await bcrypt.genSalt(10);
-      const secPass = await bcrypt.hash(req.body.password, salt);
-
-      // Create a new user
-      user = await User.create({
-        name: req.body.name,
-        username: req.body.username,
-        email: req.body.email,
-        password: secPass,
-      });
-      // .then(user => res.json(user))
-      // .catch(err => res.json({error: 'Please enter a unique value for emial', message: err.message}))
-      const data = {
-        user: {
-          id: user.id,
-        },
-      };
-      const authtoken = jwt.sign(data, JWT_SECRET);
-      success = true;
-      res.send({ success, authtoken });
     } catch (error) {
       console.log(error.message);
       res.status(500).send("Internal server error");
