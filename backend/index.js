@@ -5,7 +5,7 @@ connectToMongo();
 // Call the function to connect to MongoDB
 
 const app = express();
-const port = 5000;
+const port = process.env.NODE_ENV||5000;
 
 // app.get('/', (req, res)=>{
 //     res.send('Hello Bhai');
