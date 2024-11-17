@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const connectToMongo = async () => {
   try {
-    await mongoose.connect('mongodb://127.0.0.1:27017/iNotebook?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.10.3', {
+    await mongoose.connect('mongodb+srv://iNoteBook:28opjLspbS67jUqH@inotebook.q6gd2.mongodb.net/?retryWrites=true&w=majority&appName=iNoteBook', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
