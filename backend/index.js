@@ -7,7 +7,7 @@ connectToMongo();
 // Call the function to connect to MongoDB
 
 const app = express();
-const port = process.env.PORT || 5000;
+const port =5000;
 const _dirname = path.resolve();
 app.use(cors());
 require("dotenv").config();
