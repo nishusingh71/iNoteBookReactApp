@@ -5,8 +5,8 @@ import { ErrorMessage } from "@hookform/error-message";
 import ReCAPTCHA from "react-google-recaptcha";
 
 const Signup = (props) => {
-  const siteKey = process.env.REACT_APP_API_KEY;
-  const secretKey = process.env.REACT_APP_SECRET_KEY;
+  const siteKey = '6LfmXSQqAAAAAIBP80qZsnL1fwmP75g9UzCkdbk7';
+  const secretKey = '6LfmXSQqAAAAABZafeD_gNShpqhjrL6UKJtCmR5S';
   const [recaptchaValue, setRecaptchaValue] = useState("");
   const captchaRef = useRef();
 
