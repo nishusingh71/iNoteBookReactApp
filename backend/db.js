@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
-require('dotenv').config()
-const url = process.env.MONGO_URI;
+// require('dotenv').config()
+// const url = process.env.MONGO_URI;
 
 const connectToMongo = async () => {
   try {
-    await mongoose.connect(url, {
+    await mongoose.connect('mongodb+srv://iNoteBook:28opjLspbS67jUqH@inotebook.q6gd2.mongodb.net/?retryWrites=true&w=majority&appName=iNoteBook', {
       useNewUrlParser: true,
       useUnifiedTopology: true,
     });
