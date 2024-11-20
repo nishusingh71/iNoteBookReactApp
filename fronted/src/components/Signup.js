@@ -35,7 +35,7 @@ const Signup = (props) => {
     captchaRef.current.reset();
 
     // e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/createuser", {
+    const response = await fetch("https://inotebookreactapp-ffzg.onrender.com/api/auth/createuser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

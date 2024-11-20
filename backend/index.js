@@ -9,7 +9,12 @@ connectToMongo();
 const app = express();
 const port = process.env.PORT || 5000;
 const _dirname = path.resolve();
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://inotebookreactapp-ffzg.onrender.com",
+    credentials: true,
+  })
+);
 require("dotenv").config();
 
 app.use(express.json());
