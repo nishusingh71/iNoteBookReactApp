@@ -65,7 +65,7 @@ router.post(
           password: secPass,
         });
         // .then(user => res.json(user))
-        // .catch(err => res.json({error: 'Please enter a unique value for emial', message: err.message}))
+        // .catch(err => res.json({error: 'Please enter a unique value for email', message: err.message}))
         const data = {
           user: {
             id: user.id,
