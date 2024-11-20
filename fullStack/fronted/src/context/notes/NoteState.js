@@ -18,6 +18,8 @@ const NoteState = (props) => {
       body: JSON.stringify({ title, description, tag }),
     });
     const note = await response.json();
+    console.log(note);
+    
     setNotes(notes.concat(note));
   };
 

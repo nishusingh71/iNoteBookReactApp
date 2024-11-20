@@ -61,7 +61,7 @@ const Notes = (props) => {
         Launch demo modal
       </button>
 
-      <div
+      <div 
         className="modal fade"
         id="exampleModal"
         tabIndex="-1"
@@ -154,9 +154,9 @@ const Notes = (props) => {
       <div className="row my-3">
         <h1>Your Notes</h1>
         <div className="container mx-3">
-          {notes.length === 0 && "No notes added yet!"}
+          {notes?.length === 0 && "No notes added yet!"}
         </div>
-        {notes.map((note) => {
+        {notes?.map((note) => {
           return (
             <Noteitem
               key={note._id}
@@ -170,5 +170,6 @@ const Notes = (props) => {
     </>
   );
 };
+
 
 export default Notes;
