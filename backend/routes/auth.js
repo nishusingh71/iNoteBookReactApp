@@ -30,7 +30,7 @@ router.post(
     try {
       // Authenticating Captcha
       const captchaRes = await fetch(
-        `www.google.com/recaptcha/api/siteverify?secret=${req.body.secretKey}&response=${req.body.recaptchaValue}`,
+        `https://www.google.com/recaptcha/api/siteverify?secret=${req.body.secretKey}&response=${req.body.recaptchaValue}`,
         {
           method: "POST",
         }
